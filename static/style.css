@@ -11,3 +11,20 @@ body{
     font-family: 'Inter', sans-serif;
     font-family: 'Roboto', sans-serif;
 }
+
+.freeLabTech{
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.freeLabTech a{
+    text-decoration: none;
+    color: #141850;
+    transition: color 0.2s ease-in-out;
+}
+
+.freeLabTech a:hover{
+    color: #ff0000;
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='preauth/signup.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <title>Signup | Billsy</title>
+</head>
+<body>
+    <div class="signupContainer">
+        <div class="signupContainerInputAreas">
+            <h2 class="signupContainerLogo"><span>B</span>illsy</h2>
+            <div class="signupBox">
+                <h2>Sign Up</h2>
+                <p>Please enter your details to continue</p>
+                <form action="{{ url_for('signup') }}" method="post">
+                    <div class="userNameSection">
+                        <div class="firstNameSection">
+                            <label for="userFirstName">First Name</label>
+                            <div class="signupFirstName">
+                                <input type="text" name="userFirstName" placeholder="Enter your first name" id="userFirstName" autofocus required />
+                            </div>
+                        </div>
+                        <div class="lastNameSection">
+                            <label for="userlastName">Last Name</label>
+                            <div class="signupLastName">
+                                <input type="text" name="userlastName" placeholder="Enter your last name" id="userlastName" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="emailSection">
+                        <label for="signupEmail">Email Address</label>
+                        <div class="emailInput">
+                            <input type="email" name="signupEmail" placeholder="Enter your Email Address" id="signupEmail" required />
+                        </div>
+                    </div>
+                    <div id="passwordSection">
+                        <label for="signupPassword">Password</label>
+                        <div class="passwordInput">
+                            <input type="password" name="signupPassword" placeholder="Enter your Password" id="signupPassword" required />
+                            <i id="openEye" class="fa-solid fa-eye"></i>
+                            <i id="closeEye" class="fa-solid fa-eye-slash "></i>
+                        </div>
+                    </div>
+                    <button type="submit" id="signupBtn">Signup</button>
+                </form>
+                <a href="{{ url_for('login') }}">Have an account? Login Here</a>
+            </div>
+        </div>
+        <div class="loginContainerImageArea">
+
+        </div>
+    </div>
+
+    <p class="freeLabTech">Powered by <a href="#">Free Lab Tech</a></p>
+
+    <script src="{{ url_for('static', filename='preauth/signup.js') }}"></script>
+</body>
+</html>

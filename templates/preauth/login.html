@@ -15,7 +15,7 @@
             <div class="loginBox">
                 <h2>Log In</h2>
                 <p>Please enter your details to continue</p>
-                <form action="#" method="post">
+                <form action="{{ url_for('login') }}" method="post" enctype="multipart/form-data">
                     <div id="emailSection">
                         <label for="loginEmail">Email Address</label>
                         <div class="emailInput">
@@ -33,7 +33,7 @@
                     <button type="submit" id="loginBtn">Login</button>
                 </form>
                 <a href="#">Forgot password</a> <br>
-                <a href="#">Not have an account? Register</a>
+                <a href="{{ url_for('signup') }}">Not have an account? Register</a>
             </div>
         </div>
         <div class="loginContainerImageArea">
@@ -41,6 +41,7 @@
         </div>
     </div>
 
+    <p class="freeLabTech">Powered by <a href="#">Free Lab Tech</a></p>
     <script src="{{ url_for('static', filename='preauth/login.js') }}"></script>
 </body>
 </html>

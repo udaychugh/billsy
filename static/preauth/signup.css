@@ -1,0 +1,104 @@
+body{
+    
+    background: #e9e9e9;
+}
+
+.signupContainer{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    margin: 40px;
+    border-radius: 10px;
+    background: #fff;
+}
+
+.signupContainerInputAreas{
+    border-right: 2px solid black;
+    padding: 20px;
+    height: auto;
+    width: 45%;
+}
+
+.signupContainerLogo{
+    letter-spacing: 4px;
+    text-align: center;
+}
+
+.signupContainerLogo span{
+    color: #141850;
+}
+
+.signupBox h2{
+    margin-top: 20px;
+    margin-bottom: 2px;
+}
+
+.signupBox p{
+    margin-bottom: 20px;
+}
+
+input,
+button{
+    border: 0;
+    outline: 0;
+    width: 100%;
+    padding: 15px;
+}
+
+button{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    border: 2px solid #141850;
+    background-color: transparent;
+    color: #141850;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    transition: all 0.5s linear;
+}
+
+button:hover{
+    background-color: #141850;
+    color: #fff;
+    border: 2px solid transparent;
+}
+
+
+
+#emailSection,
+#passwordSection{
+    margin-bottom: 10px;
+}
+
+.passwordInput,
+.emailInput,
+.signupFirstName,
+.signupLastName{
+    border: 2px solid #141850;
+    display: flex;
+    align-items: center;
+}
+
+#openEye,
+#closeEye{
+    margin-right: 5px;
+    cursor: pointer;
+    transition: color 0.3s linear;
+}
+
+#openEye:hover,
+#closeEye:hover{
+    color: #ff0000;
+}
+
+.signupBox a{
+    text-decoration: none;
+}
+
+.userNameSection{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
