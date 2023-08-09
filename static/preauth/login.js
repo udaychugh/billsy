@@ -7,13 +7,13 @@ document.addEventListener('DOMContentLoaded', function(){
 function passwordToggleOpenEye(){
     document.getElementById('closeEye').style.display = "block";
     document.getElementById('openEye').style.display = "none";
-    document.getElementById("loginpassword").type = "text";
+    document.getElementById("loginPassword").type = "text";
 }
 
 function passwordToggleCloseEye(){
     document.getElementById('closeEye').style.display = "none";
     document.getElementById('openEye').style.display = "block";
-    document.getElementById("loginpassword").type = "password";
+    document.getElementById("loginPassword").type = "password";
 }
 
 //calling functions here
