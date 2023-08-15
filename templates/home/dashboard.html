@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Billsy</title>
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='home/dashboard.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    
 </head>
 <body>
     <nav class="navbar navbar-dark bg-dark fixed-top">
@@ -43,21 +46,140 @@
                   </ul>
                 </li>
               </ul>
-              <form class="d-flex mt-3" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-success" type="submit">Search</button>
-              </form>
             </div>
           </div>
         </div>
       </nav>
       
       <div class="d-flex justify-content-around mt-5 p-5">
-        <button class="btn btn-primary">Create new invoice</button>
-        <button class="btn btn-info">Free Invoice Avaliable : 0</button>
-        <button class="btn btn-success">Button 3</button>
-        <button class="btn btn-danger">Delete Invoice</button>
+        <button type="button" class="btn btn-primary">Create new invoice</button>
+        <button type="button" class="btn btn-info"  data-bs-toggle="modal" data-bs-target="#addNewRow">Add Row in Bill</button>
+        <button class="btn btn-danger">Delete Row</button>
+        <button class="btn btn-success">Print</button>
       </div>
 
+      <div class="invoiceMakingDiv">
+          <div class="invoiceHeader">
+            <div class="userAddress">
+                <input type="text" value="Company Name" id="companyName" name="companyName" disabled/><i class="fa-solid fa-circle-check"></i> <br>
+                <input type="text" value="Address first line" id="addressFirstLine" name="addressFirstLine" disabled/><i class="fa-solid fa-circle-check"></i> <br>
+                <input type="text" value="Address second line" id="addressSeocndLine" name="addressSecondLine" disabled/><i class="fa-solid fa-circle-check"></i> <br>
+                <input type="text" value="State" id="addressState" name="addressState" disabled/><i class="fa-solid fa-circle-check"></i> <br>
+                <input type="text" value="Phone No. : +91 xxxxx xxxxx" id="userPhone" name="userPhone" disabled/><i class="fa-solid fa-circle-check"></i> <br>
+                <input type="text" value="Email : user@domain.in" id="userEmailAddress" name="userEmailAddress" disabled/><i class="fa-solid fa-circle-check"></i> <br>
+                <input type="text" value="Website : webiste.com" id="userWebsite" name="userWebsite" disabled/><i class="fa-solid fa-circle-check"></i> <br>
+            </div>
+            <img src="" alt="companyLogo" id="companyLogo">
+          </div>
+
+          <h1 id="invoiceTitle">Invoice</h1>
+  
+          <div class="billingInfo">
+            <div class="billingInfoLeft">
+              <h4>Bill To:</h4>
+              <input type="text" value="Receiver Name" id="billerName" name="billerName" disabled/><i class="fa-solid fa-circle-check"></i> <br>
+              <textarea name="billingOtherInfo" id="billingOtherInfo" disabled>adddress and other infomation of the client</textarea>
+            </div>
+            <div class="billingInfoRight">
+              <b>Invoice No. : </b><input type="number" value="111" name="invoiceNo" id="invoiceNo" disabled/><i class="fa-solid fa-circle-check"></i> <br>
+              <b>Date : </b><input type="date" value="111" name="currentDate" id="currentDate" disabled/><i class="fa-solid fa-circle-check"></i> <br>
+            </div>
+          </div>
+
+          <div class="actualBill">
+            <table class="upperTable">
+            <tr class="tableHead">
+              <th>#</th>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Discount</th>
+              <th>Total</th>
+            </tr>
+            <tr id="sampleText">
+              <td class="serialNo">1.</td>
+              <td>kuch kuch dalke dekhte hai</td>
+              <td>100</td>
+              <td>2</td>
+              <td>12</td>
+              <td>12121</td>
+            </tr>
+            </table>
+            <table class="lowerTable">
+              <tr>
+                <th>&nbsp;</th>
+                <th>Total</th>
+                <th>&nbsp;</th>
+                <th></th>
+                <th>&nbsp;</th>
+                <th></th>
+              </tr>
+            </table>
+            <div class="footerPartBill">
+              <div class="footerBillLeftPart">
+                <textarea name="additionalInfo" id="additionalInfo" disabled>you can write any other info here or remove it if you dont want to add something else</textarea><i class="fa-solid fa-circle-check"></i>
+              </div>
+              <div class="footerBillRightPart">
+                <div class="subTotal">
+                  <p>Sub Total</p>
+                  <p id="subTotalAmount">0</p>
+                </div>
+                <div class="gst">
+                  <p>GST(%)</p>
+                  <input type="number" id="gstValue" value="18" name="gstValue" disabled><i class="fa-solid fa-circle-check"></i>
+                </div>
+                <div class="grandTotal">
+                  <p>Grand Total</p>
+                  <p id="grandTotalValue">0</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="addNewRow" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add new item</h5>
+            </div>
+            <div class="modal-body">
+              <label for="productName">Product Name</label> <br>
+              <input type="text" name="productName" id="productName" placeholder="Enter your product name">
+              <br>
+              <label for="productQuantity">Quantity</label> <br>
+              <input type="number" name="productQuantity" id="productQuantity" placeholder="Enter your product quantity">
+              <br>
+              <label for="productPrice">Price</label> <br>
+              <input type="number" name="productPrice" id="productPrice" placeholder="Enter your product price">
+              <br>
+              <label for="productDiscount">Discount (%)</label> <br>
+              <input type="number" name="productDiscount" id="productDiscount" placeholder="Enter your product discount">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary" id="addProduct">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-success alert-position-bottom alert-dismissible fade show" id="productAddSuccessBox" role="alert">
+        <div>
+         <i class="fa-solid fa-circle-check"></i> <strong>Successfully</strong> added your product!!
+         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      </div>  
+
+      <div class="alert alert-danger alert-position-bottom alert-dismissible fade show" id="productAddErrorBox" role="alert">
+        <div>
+          <i class="fa-solid fa-triangle-exclamation"></i> <strong>Error</strong> Please enter all data..
+         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      </div>  
+
+      <script src="{{ url_for('static', filename='home/dashboard.js') }}"></script>
     </body>
 </html>

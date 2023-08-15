@@ -1,0 +1,172 @@
+.invoiceMakingDiv{
+    padding: 30px 80px;
+    background-color: #fff;
+}
+
+.invoiceHeader{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.userAddress i,
+.billingInfo i,
+.footerPartBill i{
+    font-size: 20px;
+    margin-left: 20px;
+    color: #141850;
+    cursor: pointer;
+    transition: all 0.3s linear;
+    display: none;
+}
+
+.userAddress i:hover,
+.billingInfo i:hover,
+.footerPartBill i:hover{
+    color: rgb(3, 177, 3);
+}
+
+#companyName{
+    font-weight: bolder;
+}
+
+.userAddress input,
+.billingInfo input,
+textarea,
+.gst input{
+    width: max-content;
+    cursor: pointer;
+    color: black;
+    width: 300px;
+}
+
+.userAddress input:disabled,
+.billingInfo input:disabled,
+textarea:disabled,
+.gst input:disabled{
+    outline: none;
+    border: none;
+    background-color: #fff;
+}
+
+.userAddress input:focus,
+.billingInfo input:focus,
+textarea:focus,
+.gst input:focus{
+    padding: 5px;
+    outline: 2px;
+    border: 2px solid #000;
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button, 
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+textarea{
+    height: 100px;
+    width: 300px;
+    resize: none !important;
+}
+
+#invoiceNo,
+#currentDate{
+    width: 150px;
+    margin-bottom: 5px;
+    text-align: right;
+}
+
+#invoiceTitle{
+    text-align: center;
+    text-transform: uppercase;
+    color: #ee0000;
+    font-weight: 800;
+    letter-spacing: 2px;
+    cursor: context-menu;
+}
+
+.billingInfo{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.billingInfoLeft h4{
+    font-size: 16px;
+}
+
+.billingInfoRight{
+    text-align: right;
+}
+
+.actualBill table{
+    width: 100%;
+}
+
+.tableHead{
+    background-color: #ee0000;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.tableHead th{
+    padding: 5px 0;
+    
+}
+
+.upperTable td{
+    padding: 5px 0;
+
+}
+
+.lowerTable{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.lowerTable tr{
+    border-top: 2px solid #ee0000;
+    border-bottom: 2px solid #ee0000;
+}
+
+.footerPartBill{
+    display: flex;
+    justify-content: space-between;
+}
+
+.subTotal,
+.gst,
+.grandTotal{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+.gst input{
+    width: 100px;
+    text-align: right;
+}
+
+.modal-body input{
+    width: 100%;
+    margin-bottom: 5px;
+    padding: 8px;
+}
+
+.alert-position-bottom{
+    position: fixed !important;
+    bottom: 10px;
+    right: 10px;
+    width: 40%;
+    z-index: 9999;
+}
