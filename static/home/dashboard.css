@@ -1,29 +1,21 @@
+body{
+    background-color: #FAF9F6 !important;
+}
+
 .invoiceMakingDiv{
-    padding: 30px 80px;
+    padding: 30px 50px;
+    margin: 20px 120px;
+    color: #ee0000;
     background-color: #fff;
+    border: 0.5px solid black;
+    display: none;
+    filter: drop-shadow(2px 1px 4px #808080);
 }
 
 .invoiceHeader{
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
-}
-
-.userAddress i,
-.billingInfo i,
-.footerPartBill i{
-    font-size: 20px;
-    margin-left: 20px;
-    color: #141850;
-    cursor: pointer;
-    transition: all 0.3s linear;
-    display: none;
-}
-
-.userAddress i:hover,
-.billingInfo i:hover,
-.footerPartBill i:hover{
-    color: rgb(3, 177, 3);
 }
 
 #companyName{
@@ -38,15 +30,8 @@ textarea,
     cursor: pointer;
     color: black;
     width: 300px;
-}
-
-.userAddress input:disabled,
-.billingInfo input:disabled,
-textarea:disabled,
-.gst input:disabled{
     outline: none;
     border: none;
-    background-color: #fff;
 }
 
 .userAddress input:focus,
@@ -86,7 +71,6 @@ textarea{
 #invoiceTitle{
     text-align: center;
     text-transform: uppercase;
-    color: #ee0000;
     font-weight: 800;
     letter-spacing: 2px;
     cursor: context-menu;
@@ -110,6 +94,7 @@ textarea{
 
 .actualBill table{
     width: 100%;
+    color: #000;
 }
 
 .tableHead{
@@ -157,6 +142,12 @@ textarea{
     text-align: right;
 }
 
+.subTotal P:last-child,
+.gst P:last-child,
+.grandTotal P:last-child{
+    color: black;
+}
+
 .modal-body input{
     width: 100%;
     margin-bottom: 5px;
@@ -169,4 +160,23 @@ textarea{
     right: 10px;
     width: 40%;
     z-index: 9999;
+}
+
+.theme-custom-radio{
+    width: auto;
+    height: auto;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: white;
+    border: 2px solid #333;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.theme-custom-radio:hover{
+    
+}
+
+input[type="radio"]{
+    display: none;
 }

@@ -51,23 +51,30 @@
         </div>
       </nav>
       
-      <div class="d-flex justify-content-around mt-5 p-5">
-        <button type="button" class="btn btn-primary">Create new invoice</button>
-        <button type="button" class="btn btn-info"  data-bs-toggle="modal" data-bs-target="#addNewRow">Add Row in Bill</button>
-        <button class="btn btn-danger">Delete Row</button>
-        <button class="btn btn-success">Print</button>
+      <div class="d-flex justify-content-around mt-5 p-5" id="invoiceCreateBtn">
+        <button onclick="createNewInvoice()" type="button" class="btn btn-primary"><i class="fa-solid fa-file-invoice"></i> Create new invoice</button>
+        <button type="button" class="btn btn-primary"><i class="fa-regular fa-folder-open"></i> Open Invoice</button>
+      </div>
+
+      <div class="justify-content-around mt-5 p-5" id="invoiceEditBtns">
+        <button type="button" class="btn btn-info"  data-bs-toggle="modal" data-bs-target="#addNewRow"><i class="fa-solid fa-plus"></i> Add Row</button>
+        <button type="button" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Delete Row</button>
+        <button type="button" class="btn btn-success" id="printInvoice"><i class="fa-solid fa-print"></i> Print</button>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#saveInvoice"><i class="fa-regular fa-floppy-disk"></i> Save</button>
+        <button type="button" class="btn btn-primary"><i class="fa-solid fa-share-nodes"></i> Share</button>
+        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#changeTheme"><i class="fa-solid fa-palette"></i> Change Theme</button>
       </div>
 
       <div class="invoiceMakingDiv">
           <div class="invoiceHeader">
             <div class="userAddress">
-                <input type="text" value="Company Name" id="companyName" name="companyName" disabled/><i class="fa-solid fa-circle-check"></i> <br>
-                <input type="text" value="Address first line" id="addressFirstLine" name="addressFirstLine" disabled/><i class="fa-solid fa-circle-check"></i> <br>
-                <input type="text" value="Address second line" id="addressSeocndLine" name="addressSecondLine" disabled/><i class="fa-solid fa-circle-check"></i> <br>
-                <input type="text" value="State" id="addressState" name="addressState" disabled/><i class="fa-solid fa-circle-check"></i> <br>
-                <input type="text" value="Phone No. : +91 xxxxx xxxxx" id="userPhone" name="userPhone" disabled/><i class="fa-solid fa-circle-check"></i> <br>
-                <input type="text" value="Email : user@domain.in" id="userEmailAddress" name="userEmailAddress" disabled/><i class="fa-solid fa-circle-check"></i> <br>
-                <input type="text" value="Website : webiste.com" id="userWebsite" name="userWebsite" disabled/><i class="fa-solid fa-circle-check"></i> <br>
+                <input type="text" value="Company Name" id="companyName" name="companyName"/><br>
+                <input type="text" value="Address first line" id="addressFirstLine" name="addressFirstLine"/> <br>
+                <input type="text" value="Address second line" id="addressSeocndLine" name="addressSecondLine"/> <br>
+                <input type="text" value="State" id="addressState" name="addressState" /><br>
+                <input type="text" value="Phone No. : +91 xxxxx xxxxx" id="userPhone" name="userPhone"/> <br>
+                <input type="text" value="Email : user@domain.in" id="userEmailAddress" name="userEmailAddress"/> <br>
+                <input type="text" value="Website : website.com" id="userWebsite" name="userWebsite"/> <br>
             </div>
             <img src="" alt="companyLogo" id="companyLogo">
           </div>
@@ -77,32 +84,24 @@
           <div class="billingInfo">
             <div class="billingInfoLeft">
               <h4>Bill To:</h4>
-              <input type="text" value="Receiver Name" id="billerName" name="billerName" disabled/><i class="fa-solid fa-circle-check"></i> <br>
-              <textarea name="billingOtherInfo" id="billingOtherInfo" disabled>adddress and other infomation of the client</textarea>
+              <input type="text" value="Receiver Name" id="billerName" name="billerName"/><br>
+              <textarea name="billingOtherInfo" id="billingOtherInfo" >adddress and other infomation of the client</textarea>
             </div>
             <div class="billingInfoRight">
-              <b>Invoice No. : </b><input type="number" value="111" name="invoiceNo" id="invoiceNo" disabled/><i class="fa-solid fa-circle-check"></i> <br>
-              <b>Date : </b><input type="date" value="111" name="currentDate" id="currentDate" disabled/><i class="fa-solid fa-circle-check"></i> <br>
+              <b>Invoice No. : </b><input type="number" value="111" name="invoiceNo" id="invoiceNo"/><br>
+              <b>Date : </b><input type="date" name="currentDate" id="currentDate"/><br>
             </div>
           </div>
 
           <div class="actualBill">
-            <table class="upperTable">
+            <table class="upperTable" id="upperTable">
             <tr class="tableHead">
-              <th>#</th>
+              <th>S.No.</th>
               <th>Product</th>
               <th>Price</th>
               <th>Quantity</th>
-              <th>Discount</th>
+              <th>Discount(%)</th>
               <th>Total</th>
-            </tr>
-            <tr id="sampleText">
-              <td class="serialNo">1.</td>
-              <td>kuch kuch dalke dekhte hai</td>
-              <td>100</td>
-              <td>2</td>
-              <td>12</td>
-              <td>12121</td>
             </tr>
             </table>
             <table class="lowerTable">
@@ -117,19 +116,19 @@
             </table>
             <div class="footerPartBill">
               <div class="footerBillLeftPart">
-                <textarea name="additionalInfo" id="additionalInfo" disabled>you can write any other info here or remove it if you dont want to add something else</textarea><i class="fa-solid fa-circle-check"></i>
+                <textarea name="additionalInfo" id="additionalInfo" >you can write any other info here or remove it if you dont want to add something else</textarea>
               </div>
               <div class="footerBillRightPart">
                 <div class="subTotal">
-                  <p>Sub Total</p>
+                  <p><strong>Sub Total</strong></p>
                   <p id="subTotalAmount">0</p>
                 </div>
                 <div class="gst">
-                  <p>GST(%)</p>
-                  <input type="number" id="gstValue" value="18" name="gstValue" disabled><i class="fa-solid fa-circle-check"></i>
+                  <p><strong>GST(%)</strong></p>
+                  <input type="number" id="gstValue" value="18" name="gstValue" >
                 </div>
                 <div class="grandTotal">
-                  <p>Grand Total</p>
+                  <p><strong>Grand Total</strong></p>
                   <p id="grandTotalValue">0</p>
                 </div>
               </div>
@@ -138,7 +137,7 @@
 
       </div>
 
-      <!-- Modal -->
+      <!-- Modal add new row -->
       <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="addNewRow" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
@@ -166,17 +165,70 @@
         </div>
       </div>
 
+      <!-- Modal change theme color -->
+      <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="changeTheme" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Select Theme Color</h5>
+            </div>
+            <div class="modal-body">
+              <div class="theme-custom-radio">
+                <input type="radio" class="custom-radio-input" id="invoiceTheme1" name="invoiceTheme" value="1" checked>
+                <label for="invoiceTheme1">Default Red</label>
+              </div>
+              <div class="theme-custom-radio">
+                <input type="radio" class="custom-radio-input" id="invoiceTheme2" name="invoiceTheme" value="2">
+                <label for="invoiceTheme2">App Blue</label>
+              </div>
+              <div class="theme-custom-radio">
+                <input type="radio"class="custom-radio-input" id="invoiceTheme3" name="invoiceTheme" value="3">
+                <label for="invoiceTheme3">Nature Green</label>
+              </div>
+              <div class="theme-custom-radio">
+                <input type="radio" class="custom-radio-input" id="invoiceTheme4" name="invoiceTheme" value="4">
+                <label for="invoiceTheme4">Sun Orange</label>
+              </div>
+              <div class="theme-custom-radio">
+                <input type="radio" class="custom-radio-input" id="invoiceTheme5" name="invoiceTheme" value="5">
+                <label for="invoiceTheme5">Animal Brown</label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary" onclick="changeTheme()">Change</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal save your file -->
+      <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="saveInvoice" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Enter your file name</h5>
+            </div>
+            <div class="modal-body">
+              <input type="text" name="invoiceFileName" id="invoiceFileName" placeholder="Enter your file name" autofocus>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary" onclick="saveInvoiceFunction()">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="alert alert-success alert-position-bottom alert-dismissible fade show" id="productAddSuccessBox" role="alert">
         <div>
          <i class="fa-solid fa-circle-check"></i> <strong>Successfully</strong> added your product!!
-         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       </div>  
 
       <div class="alert alert-danger alert-position-bottom alert-dismissible fade show" id="productAddErrorBox" role="alert">
         <div>
           <i class="fa-solid fa-triangle-exclamation"></i> <strong>Error</strong> Please enter all data..
-         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       </div>  
 
