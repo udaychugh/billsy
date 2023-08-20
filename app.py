@@ -18,10 +18,14 @@ def authenticate_user(email, password):
 
 @app.route('/')
 def index():
+    if "logedin" in session and session["logedin"]:
+        return redirect(url_for('dashboard'))
     return render_template('index.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
-def signup():
+def signup():   
+    if "logedin" in session and session["logedin"]:
+        return redirect(url_for('dashboard'))                     
     if request.method == "POST":
         firstName = request.form['userFirstName']
         lastName = request.form['userlastName']
@@ -32,12 +36,15 @@ def signup():
             cur = con.cursor()
             cur.execute('INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)', (firstName, lastName, email, password))
             con.commit()
-        
+        isUserLoggedIn = 1
         return redirect(url_for('dashboard'))
     return render_template('preauth/signup.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if "logedin" in session and session["logedin"]:
+        return redirect(url_for('dashboard'))
+    
     msg = ''
     if request.method == "POST":
         email = request.form['loginEmail']
@@ -49,10 +56,17 @@ def login():
             error_msg = 'Invalid credentials entered. Please try again.'
     return render_template('preauth/login.html')
 
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('login'))
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template('home/dashboard.html')
+    if "logedin" in session and session["logedin"]:
+        return render_template('home/dashboard.html')
+    else:
+        return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run(debug=True)

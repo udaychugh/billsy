@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='images/icon_logo.png')}}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
     <link rel="stylesheet" href="{{ url_for('static', filename='preauth/login.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
@@ -29,6 +30,10 @@
                             <i id="openEye" class="fa-solid fa-eye"></i>
                             <i id="closeEye" class="fa-solid fa-eye-slash "></i>
                         </div>
+                    </div>
+                    <div class="rememberMeDiv">
+                        <input type="checkbox" class="checkbox" id="remeberMeCheck" name="remeberMeCheck">
+                        <label for="remeberMeCheck">Remember me</label>
                     </div>
                     <button type="submit" id="loginBtn">Login</button>
                 </form>

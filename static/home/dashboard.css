@@ -173,10 +173,6 @@ textarea{
     cursor: pointer;
 }
 
-.theme-custom-radio:hover{
-    
-}
-
 input[type="radio"]{
     display: none;
 }
