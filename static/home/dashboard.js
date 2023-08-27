@@ -70,18 +70,13 @@ function validateGrandTotalAmount(){
     document.getElementById("grandTotalValue").innerHTML = grandTotal;
 }
 
-function printInvoice(){
-    var printContent = document.querySelector(".invoiceMakingDiv").innerHTML;
-    var originalContents = document.body.innerHTML;
 
-    document.body.innerHTML = printContent;
-
-    window.print();
-
-    document.body.innerHTML = originalContents;
-}
 
 //calling functions
 document.getElementById("addProduct").addEventListener("click", addProductInRow);
 document.getElementById("gstValue").addEventListener("change", validateGrandTotalAmount);
-document.getElementById("printInvoice").addEventListener("click", printInvoice);
+document.getElementById("printInvoice").addEventListener("click", function() {
+    fetch('/downloadPdf', {
+        method : 'POST'
+    });
+});

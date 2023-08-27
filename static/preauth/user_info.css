@@ -1,0 +1,90 @@
+body{
+    background-color: #FAF9F6 !important;
+}
+
+.whiteBoxWithShadow{
+    background-color: #fff !important;
+    border-radius: 20px;
+}
+
+.userSavedInfo {
+    color: #141850;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userSavedInfo img{
+    height: 100px;
+    width: auto;
+}
+
+.inputFormBox{
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #414040;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.inputFormBox input{
+    border: none;
+    outline: none;
+    width: 80%;
+    margin-left: 20px;
+}
+
+.inputFormBox i{
+    font-size: 16px;
+    width: 10px;
+}
+
+.inputFormBox button{
+    background-color: transparent;
+    outline: none;
+    border: none;
+}
+
+.savingDiv{
+    margin-top: 20px;
+    text-align: center;
+}
+
+.savingDiv a{
+    color: #e90000;
+}
+
+.logoCancel{
+    width: 45%;
+    text-align: right;
+}
+
+.logoCancel i{
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    font-size: 20px;
+    transition: all 0.3s linear;
+    display: none;
+}
+
+.logoCancel img:hover + i,
+.logoCancel i:hover{
+    display: inline;
+}
+
+.logoCancel i:hover{
+    color: #e90000;
+}
+
+.savingDiv button{
+    width: 80%;
+    padding: 10px;
+    margin-top: 6px;
+    outline: none;
+    border-radius: 10px;
+    background-color: #141850;
+    color: #fff;
+    font-weight: bold;
+}

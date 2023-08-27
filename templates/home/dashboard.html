@@ -32,6 +32,12 @@
                 <li class="nav-item">
                   <a class="nav-link" href="#">Pricing</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{url_for('my_products')}}">My Products</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{url_for('user_info')}}">Edit My Business Info</a>
+                </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     More
@@ -60,7 +66,7 @@
       <div class="justify-content-around mt-5 p-5" id="invoiceEditBtns">
         <button type="button" class="btn btn-info"  data-bs-toggle="modal" data-bs-target="#addNewRow"><i class="fa-solid fa-plus"></i> Add Row</button>
         <button type="button" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Delete Row</button>
-        <button type="button" class="btn btn-success" id="printInvoice"><i class="fa-solid fa-print"></i> Print</button>
+        <button type="button" class="btn btn-success" id="printInvoice"><i class="fa-solid fa-print"></i> Download</button>
         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#saveInvoice"><i class="fa-regular fa-floppy-disk"></i> Save</button>
         <button type="button" class="btn btn-primary"><i class="fa-solid fa-share-nodes"></i> Share</button>
         <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#changeTheme"><i class="fa-solid fa-palette"></i> Change Theme</button>

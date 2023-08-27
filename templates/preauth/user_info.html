@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='images/icon_logo.png')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='preauth/user_info.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <title>User Info | Billsy</title>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+          <span class="navbar-brand mb-0 h1">Billsy</span>
+        </div>
+      </nav>
+
+      <div class="container w-50 mx-auto shadow m-5 p-5 whiteBoxWithShadow">
+        <div class="userSavedInfo">
+            <div class="mb-3">
+                <i class="fa-solid fa-user"></i>
+                <h2>{{session.username}}</h2>
+                <p>{{session.email}}</p>
+            </div>
+
+            <div class="mb-3 logoCancel position-relative">
+                <label for="formFile" id="logoLabel" class="form-label">Select Your Logo (PNG, JPG, JPEG)</label>
+                <input class="form-control" type="file" id="userCompanyLogo" accept=".png, .jpg, .jpeg" onchange="displayLogo()">
+                <img src="" alt="" id="userCompanyLogoImg">
+                <i class="fa-solid fa-circle-xmark" id="deleteLogo"></i>
+              </div>
+        </div>
+        <div class="userNewInfoForm">
+            <form action="#">
+                <div class="inputFormBox">
+                    <i class="fa-solid fa-briefcase"></i>
+                    <input type="text" placeholder="Enter your company name" name="userCompanyName" id="userCompanyName" autofocus required>
+                </div>
+
+                <div class="inputFormBox">
+                    <i class="fa-solid fa-address-book"></i>
+                    <input type="text" placeholder="Enter address line 1" name="userAddresLine1" id="userAddresLine1" required>
+                </div>
+
+                <div class="inputFormBox">
+                    <i class="fa-solid fa-address-book"></i>
+                    <input type="text" placeholder="Enter address line 2" name="userAddresLine2" id="userAddresLine2" required>
+                </div>
+
+                <div class="inputFormBox">
+                    <i class="fa-solid fa-building-user"></i>
+                    <input type="text" placeholder="Enter state and city" name="userState" id="userState" required>
+                </div>
+
+                <div class="inputFormBox">
+                    <i class="fa-solid fa-phone"></i>
+                    <input type="number" placeholder="Enter your phone number" name="userPhoneName" id="userPhoneName" required>
+                </div> 
+
+                <div class="inputFormBox">
+                    <i class="fa-solid fa-earth-asia"></i>
+                    <input type="text" placeholder="Enter your website" name="userWebsite" id="userWebsite">
+                </div>
+                
+                <div class="inputFormBox">
+                    <button type="button" id="enableBtn" onclick="enableGSTInput()">My Business is GST Registered</button>
+                    <i class="fa-solid fa-file-invoice" id="gstIcon"></i>
+                    <input type="text" placeholder="Enter your GST Number" name="userGST" id="userGST">
+                </div>
+                
+                <div class="savingDiv">
+                    <a href="{{url_for('dashboard')}}">Skip this step for now</a>
+                    <button button type="submit">Save Info</button>    
+                </div>
+            </form>
+        </div>
+      </div>
+
+      <script src="{{ url_for('static', filename='preauth/user_info.js') }}"></script>
+</body>
+</html>
