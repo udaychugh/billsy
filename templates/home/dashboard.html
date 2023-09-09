@@ -64,7 +64,7 @@
       </div>
 
       <div class="justify-content-around mt-5 p-5" id="invoiceEditBtns">
-        <button type="button" class="btn btn-info"  data-bs-toggle="modal" data-bs-target="#addNewRow"><i class="fa-solid fa-plus"></i> Add Row</button>
+        <button type="button" class="btn btn-info" id="openAddNewRowModal"  data-bs-toggle="modal" data-bs-target="#addNewRow"><i class="fa-solid fa-plus"></i> Add Row (Alt + N)</button>
         <button type="button" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Delete Row</button>
         <button type="button" class="btn btn-success" id="printInvoice"><i class="fa-solid fa-print"></i> Download</button>
         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#saveInvoice"><i class="fa-regular fa-floppy-disk"></i> Save</button>
@@ -75,18 +75,20 @@
       <div class="invoiceMakingDiv">
           <div class="invoiceHeader">
             <div class="userAddress">
-                <input type="text" value="Company Name" id="companyName" name="companyName"/><br>
-                <input type="text" value="Address first line" id="addressFirstLine" name="addressFirstLine"/> <br>
-                <input type="text" value="Address second line" id="addressSeocndLine" name="addressSecondLine"/> <br>
-                <input type="text" value="State" id="addressState" name="addressState" /><br>
-                <input type="text" value="Phone No. : +91 xxxxx xxxxx" id="userPhone" name="userPhone"/> <br>
-                <input type="text" value="Email : user@domain.in" id="userEmailAddress" name="userEmailAddress"/> <br>
-                <input type="text" value="Website : website.com" id="userWebsite" name="userWebsite"/> <br>
+                <input type="text" value="{{ userDetails[2] | default('Compnay Name') }}" id="companyName" name="companyName"/><br>
+                <input type="text" value="{{ userDetails[3] | default('Address First Line') }}" id="addressFirstLine" name="addressFirstLine"/> <br>
+                <input type="text" value="{{ userDetails[4] | default('Address Second Line') }}" id="addressSeocndLine" name="addressSecondLine"/> <br>
+                <input type="text" value="{{ userDetails[5] | default('State') }}" id="addressState" name="addressState" /><br>
+                
+                <input type="text" value="{{ userDetails[6] | default('Phone No. : +91 xxxxx xxxxx') }}" id="userPhone" name="userPhone"/> <br>
+                <input type="text" value="{{ session.email | default('Email : user@domain.in') }}" id="userEmailAddress" name="userEmailAddress"/> <br>
+                <input type="text" value="{{ userDetails[7] | default('Website : website.com') }}" id="userWebsite" name="userWebsite"/> <br>
             </div>
             <img src="" alt="companyLogo" id="companyLogo">
           </div>
 
           <h1 id="invoiceTitle">Invoice</h1>
+          <h6 align="center">GST : <span>{{userDetails[8] | default('Exempted')}}</span> </h6>
   
           <div class="billingInfo">
             <div class="billingInfoLeft">
@@ -166,7 +168,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-primary" id="addProduct">Add</button>
+              <button type="submit" class="btn btn-primary" id="addProduct">Add</button>
             </div>
           </div>
         </div>

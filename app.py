@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for, session, make_response, send_file
+from flask import Flask, render_template, request, redirect, url_for, session, Response
 import sqlite3
-import pdfkit
+from io import BytesIO
+from reportlab.pdfgen import canvas
 
 app = Flask(__name__)
 app.secret_key = "mykey123"
@@ -32,13 +33,15 @@ def signup():
         lastName = request.form['userlastName']
         email = request.form['signupEmail']
         password = request.form['signupPassword']
+        session['email'] = email
+        session['first_name'] = firstName
+        session['last_name'] = lastName
 
         with sqlite3.connect(DATABASE) as con:
             cur = con.cursor()
             cur.execute('INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)', (firstName, lastName, email, password))
             con.commit()
-        isUserLoggedIn = 1
-        return redirect(url_for('dashboard'))
+        return redirect(url_for('user_info'))
     return render_template('preauth/signup.html')
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -65,12 +68,39 @@ def logout():
 @app.route('/dashboard')
 def dashboard():
     if "logedin" in session and session["logedin"]:
-        return render_template('home/dashboard.html')
+        userDetails = getUserInfo()
+        return render_template('home/dashboard.html', userDetails = userDetails)
     else:
         return redirect(url_for('login'))
     
-@app.route('/user_info')
+def getUserId():
+    email = session['email']
+    conn = sqlite3.connect(DATABASE)
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT id FROM users WHERE email = ?", (email,))
+    user_id = cursor.fetchone()
+
+    conn.close()
+    return user_id
+    
+@app.route('/user_info', methods=["GET", "POST"])
 def user_info():
+    if request.method == "POST":
+        companyName = request.form['userCompanyName']
+        addressLine1 = request.form['userAddresLine1']
+        addressLine2 = request.form['userAddresLine2']
+        state = request.form['userState']
+        phone = request.form['userPhoneName']
+        website = request.form['userWebsite']
+        gst = request.form['userGST']
+        user_id = getUserId()
+        session["logedin"] = True
+        with sqlite3.connect(DATABASE) as con:
+            cur = con.cursor()
+            cur.execute('INSERT INTO user_details (user_id, company_name, address_line1, address_line2, state, phone, wesbite, gst) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', (user_id[0], companyName, addressLine1, addressLine2, state, phone, website, gst))
+            con.commit()
+        return redirect(url_for('dashboard'))
     return render_template('preauth/user_info.html')
     
 @app.route('/my_products')
@@ -79,25 +109,29 @@ def my_products():
     
 @app.route('/downloadPdf', methods=['POST'])
 def downloadPdf():
-    html_content = """
-    <html>
-    <head>
-        <style>
-            /* Your CSS styles for the specific div */
-        </style>
-    </head>
-    <body>
-        <div id="your-div">
-            <!-- Your content here -->
-        </div>
-    </body>
-    </html>
-    """
-    generatedPdf = pdfkit.from_string(html_content, False)
-    response = make_response(generatedPdf)
-    response.headers['Content-Type'] = 'application/pdf'
-    response.headers['Content-Disposition'] = 'attachment; filename=output.pdf'
+    invoice = request.form['div_content']
+    print("yes it is clicked")
+    pdf_buffer = BytesIO()
+    c = canvas.Canvas(pdf_buffer)
+    c.drawString(100, 750, invoice)
+    c.save()
+    pdf_buffer.seek(0)
+    response = Response(pdf_buffer.read(), content_type='application/pdf')
+    response.headers['Content-Disposition'] = 'attachment; filename="output.pdf"'
     return response
+
+
+def getUserInfo():
+    currentUserEmail = session["email"]
+    conn = sqlite3.connect(DATABASE)
+    cursor = conn.cursor()
+    cursor.execute("SELECT id FROM users WHERE email = ?", (currentUserEmail,))
+    currentUserId = cursor.fetchone()
+    currentUserId = currentUserId[0]
+    cursor.execute("SELECT * FROM user_details WHERE user_id = ?", (currentUserId,))
+    userDetails = cursor.fetchone()
+    if userDetails:
+        return userDetails
 
 if __name__ == '__main__':
     app.run(debug=True)

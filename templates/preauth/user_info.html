@@ -22,7 +22,7 @@
         <div class="userSavedInfo">
             <div class="mb-3">
                 <i class="fa-solid fa-user"></i>
-                <h2>{{session.username}}</h2>
+                <h2>{{session.first_name}} {{session.last_name}}</h2>
                 <p>{{session.email}}</p>
             </div>
 
@@ -34,7 +34,7 @@
               </div>
         </div>
         <div class="userNewInfoForm">
-            <form action="#">
+            <form action="{{ url_for('user_info')}}" method="post">
                 <div class="inputFormBox">
                     <i class="fa-solid fa-briefcase"></i>
                     <input type="text" placeholder="Enter your company name" name="userCompanyName" id="userCompanyName" autofocus required>

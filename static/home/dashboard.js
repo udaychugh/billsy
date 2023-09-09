@@ -52,6 +52,7 @@ function createProductRow(serialNo, productName, productQuantity, productPrice, 
     var addNewRow = document.createElement("tr");
     subTotal = subTotal + totalAmount;
     grandTotal = subTotal * (1+(gstValue.value/100));
+    subTotal = subTotal.toFixed(2);
     document.getElementById("subTotalAmount").innerHTML = subTotal;
     document.getElementById("grandTotalValue").innerHTML = grandTotal;
     addNewRow.innerHTML = `
@@ -60,23 +61,45 @@ function createProductRow(serialNo, productName, productQuantity, productPrice, 
         <td>${productQuantity}</td>
         <td>${productPrice}</td>
         <td>${productDiscount}</td>
-        <td>${totalAmount}</td>
+        <td>${parseFloat(totalAmount).toFixed(2)}</td>
     `;
     addTable.appendChild(addNewRow);
 }
 
 function validateGrandTotalAmount(){
     grandTotal = subTotal * (1+(gstValue.value/100));
+    grandTotal = grandTotal.toFixed(2);
     document.getElementById("grandTotalValue").innerHTML = grandTotal;
 }
 
+function downloadPdf(){
+    divContent = document.getElementById("invoiceMakingDiv").innerHTML;
+    fetch('/downloadPdf', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `div_content=${divContent}`
+    })
+    .then(response => response.text())
+    .then(message => {
+        alert(message);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+//adding shortcut keys here
+document.addEventListener("keydown", function(event) {
+    //add new row
+    if(event.altKey && event.key == "n"){
+        document.getElementById("openAddNewRowModal").click();
+    }
+});
 
 
 //calling functions
 document.getElementById("addProduct").addEventListener("click", addProductInRow);
 document.getElementById("gstValue").addEventListener("change", validateGrandTotalAmount);
-document.getElementById("printInvoice").addEventListener("click", function() {
-    fetch('/downloadPdf', {
-        method : 'POST'
-    });
-});
+document.getElementById("printInvoice").addEventListener("click", downloadPdf)
