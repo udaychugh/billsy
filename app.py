@@ -1,7 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for, session, Response
+from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
-from io import BytesIO
-from reportlab.pdfgen import canvas
 
 app = Flask(__name__)
 app.secret_key = "mykey123"
