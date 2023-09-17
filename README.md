@@ -58,6 +58,6 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Contact
 
-If you have any questions or need assistance, feel free to reach out to us at [udaychugh8@email.com](mailto:udaychugh8@email.com).
+If you have any questions or need assistance, feel free to reach out to us at [udaychugh8@gmail.com](mailto:udaychugh8@gmail.com).
 
 Happy billing! 🚀
