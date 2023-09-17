@@ -1,6 +1,12 @@
 // setting current date in invoice
 document.getElementById("currentDate").valueAsDate = new Date();
 
+window.addEventListener("beforeunload", function (e) {
+    var confirmationMessage = "Are you sure you want to leave this page?";
+    e.returnValue = confirmationMessage; 
+    return confirmationMessage;
+});
+
 //selecting invoice div
 const invoiceDiv = document.querySelector(".invoiceMakingDiv");
 
@@ -19,6 +25,7 @@ function createNewInvoice(){
     document.querySelector("#invoiceEditBtns").classList.remove("d-none");
     document.querySelector("#invoiceEditBtns").classList.add("d-flex");
     document.querySelector("#invoiceCreateBtn").classList.toggle("d-none");
+    checkForGstInput();
 }
 
 function addProductInRow(){
@@ -73,21 +80,47 @@ function validateGrandTotalAmount(){
 }
 
 function downloadPdf(){
-    divContent = document.getElementById("invoiceMakingDiv").innerHTML;
-    fetch('/downloadPdf', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: `div_content=${divContent}`
-    })
-    .then(response => response.text())
-    .then(message => {
-        alert(message);
-    })
-    .catch(error => {
-        console.error('Error:', error);
+    printout("#toprintthis", {
+        pageTitle: window.document.title,
+        importCSS: true,
+        autoPrint: true,
+        autoPrintDelay: 1000,
+        header: null,
+        footer: null,
+        closeAfterPrint: close,
     });
+}
+
+function displayLogo(){
+    const input = document.getElementById('userCompanyLogo');
+    const img = document.getElementById('userCompanyLogoImg');
+    const label = document.getElementById('logoLabel');
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            img.src = e.target.result;
+        };
+        img.style.display = "inline";
+        input.style.display = "none";
+        label.style.display = "none";
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function deleteLogo(){
+    document.getElementById("userCompanyLogoImg").style.display = "none";
+    document.getElementById("userCompanyLogo").value = "";
+    document.getElementById('userCompanyLogo').style.display = "inline";
+    document.getElementById('logoLabel').style.display = "inline";
+}
+
+function checkForGstInput(){
+    var userGstInput = document.getElementById("userGstValue").textContent;
+    if (userGstInput == "GST :  "){
+        document.getElementById("userGstValue").innerHTML = "GST : Exempted";
+        document.getElementById("userGstValue").title = "if you want to add gst number than go to Edit my business info and check for i have gst number in form."
+    }
 }
 
 //adding shortcut keys here
@@ -98,8 +131,8 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
-
 //calling functions
 document.getElementById("addProduct").addEventListener("click", addProductInRow);
 document.getElementById("gstValue").addEventListener("change", validateGrandTotalAmount);
-document.getElementById("printInvoice").addEventListener("click", downloadPdf)
+document.getElementById("printInvoice").addEventListener("click", downloadPdf);
+document.getElementById("deleteLogo").addEventListener("click", deleteLogo);

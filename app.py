@@ -107,20 +107,6 @@ def user_info():
 def my_products():
     return render_template('home/my_products.html')
     
-@app.route('/downloadPdf', methods=['POST'])
-def downloadPdf():
-    invoice = request.form['div_content']
-    print("yes it is clicked")
-    pdf_buffer = BytesIO()
-    c = canvas.Canvas(pdf_buffer)
-    c.drawString(100, 750, invoice)
-    c.save()
-    pdf_buffer.seek(0)
-    response = Response(pdf_buffer.read(), content_type='application/pdf')
-    response.headers['Content-Disposition'] = 'attachment; filename="output.pdf"'
-    return response
-
-
 def getUserInfo():
     currentUserEmail = session["email"]
     conn = sqlite3.connect(DATABASE)
