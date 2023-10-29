@@ -5,7 +5,7 @@ app = Flask(__name__)
 app.secret_key = "mykey123"
 
 # SQLite database configuration
-DATABASE = 'database.db'
+DATABASE = 'https://github.com/udaychugh/billsy/blob/release/v1/database.db'
 
 def authenticate_user(email, password):
     with sqlite3.connect(DATABASE) as con:
