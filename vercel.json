@@ -1,0 +1,14 @@
+{
+     "builds": [
+         {
+             "src": "billsy/app.py",
+             "use": "@vercel/python"
+         }
+     ],
+     "routes": [
+         {
+             "src": "/(.*)",
+             "dest": "bilssy/app.py"
+         }
+     ]
+ }
